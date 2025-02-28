@@ -2,7 +2,6 @@ package unit.device;
 
 import devices.Device;
 import devices.FailingPolicy;
-import devices.RandomFailing;
 import devices.StandardDevice;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,5 +73,15 @@ public class DeviceUnitTest {
         assertEquals("StandardDevice{policy=mock, on=false}", this.device.toString());
     }
 
-    
+    @Description("It should be possible to reset a device")
+    @Tag("unit")
+    @Test
+    public void testResetOfADevice() {
+        this.device = new StandardDevice(this.mockFailingPolicy);
+        when(this.mockFailingPolicy.attemptOn()).thenReturn(true);
+        this.device.on();
+        this.device.reset();
+        assertFalse(this.device.isOn());
+    }
+
 }
