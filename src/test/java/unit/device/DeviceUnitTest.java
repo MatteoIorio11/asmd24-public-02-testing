@@ -64,6 +64,15 @@ public class DeviceUnitTest {
         assertFalse(this.device.isOn());
     }
 
+    @Description("A policy that fails to turn on a device should throw an IllegalStateException")
+    @Tag("unit")
+    @Test
+    public void testPolicyFailsToTurnOn() {
+        this.device = new StandardDevice(this.mockFailingPolicy);
+        when(this.mockFailingPolicy.attemptOn()).thenReturn(false);
+        assertThrows(IllegalStateException.class, () -> this.device.on());
+    }
+
     @Description("It should be possible to print the entire name of a device")
     @Tag("unit")
     @Test
