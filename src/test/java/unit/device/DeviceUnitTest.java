@@ -23,6 +23,17 @@ public class DeviceUnitTest {
         } catch (Exception e) {}
     }
 
+    @Description("Creating a Device with a Null policy should return an error")
+    @Tag("unit")
+    @Test
+    public void testNullPolicy() {
+        try {
+            this.device = new StandardDevice(null);
+        } catch (Exception e) {
+            assertTrue(e instanceof NullPointerException    );
+        }
+    }
+
     @Description("When a new device is initialized, It must be turned off")
     @Tag("unit")
     @Test
