@@ -54,5 +54,15 @@ public class DeviceUnitTest {
         assertTrue(this.device.isOn());
     }
 
-    
+    @Description("It should be possible to turning off a device that is on")
+    @Tag("unit")
+    @Test
+    public void testTurnOffAfterBeingOn() {
+        this.device = new StandardDevice(this.mockFailingPolicy);
+        when(this.mockFailingPolicy.attemptOn()).thenReturn(true);
+        this.device.on();
+        assertTrue(this.device.isOn());
+        this.device.off();
+        assertFalse(this.device.isOn());
+    }
 }
