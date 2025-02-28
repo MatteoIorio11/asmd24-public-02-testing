@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 public class DeviceUnitTest {
@@ -65,4 +64,15 @@ public class DeviceUnitTest {
         this.device.off();
         assertFalse(this.device.isOn());
     }
+
+    @Description("It should be possible to print the entire name of a device")
+    @Tag("unit")
+    @Test
+    public void testPrintDeviceName() {
+        this.device = new StandardDevice(this.mockFailingPolicy);
+        when(this.mockFailingPolicy.policyName()).thenReturn("mock");
+        assertEquals("StandardDevice{policy=mock, on=false}", this.device.toString());
+    }
+
+    
 }
