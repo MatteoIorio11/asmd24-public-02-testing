@@ -29,4 +29,12 @@ public class FailingUnitTest {
         assertFalse(this.failingPolicy.attemptOn());
     }
 
+    @Description("A policy that can be turned on should return true when attempting on")
+    @Tag("unit")
+    @Test
+    public void testAlwaysSucceedingPolicy() {
+        when(this.failingPolicy.attemptOn()).thenReturn(true);
+        assert(this.failingPolicy.attemptOn());
+    }
+
 }
