@@ -2,6 +2,7 @@ package unit.device;
 
 import devices.Device;
 import devices.FailingPolicy;
+import devices.RandomFailing;
 import devices.StandardDevice;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 public class DeviceUnitTest {
     @Mock FailingPolicy mockFailingPolicy;
@@ -30,7 +32,7 @@ public class DeviceUnitTest {
         try {
             this.device = new StandardDevice(null);
         } catch (Exception e) {
-            assertTrue(e instanceof NullPointerException    );
+            assertTrue(e instanceof NullPointerException);
         }
     }
 
@@ -47,7 +49,10 @@ public class DeviceUnitTest {
     @Test
     public void testTurnOn() {
         this.device = new StandardDevice(this.mockFailingPolicy);
+        when(this.mockFailingPolicy.attemptOn()).thenReturn(true);
         this.device.on();
         assertTrue(this.device.isOn());
     }
+
+    
 }
