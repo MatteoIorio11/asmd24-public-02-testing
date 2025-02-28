@@ -29,6 +29,7 @@ public class DeviceUnitTest {
     public void testNullPolicy() {
         try {
             this.device = new StandardDevice(null);
+            fail("The device should not be created if the policy is null");
         } catch (Exception e) {
             assertTrue(e instanceof NullPointerException);
         }
