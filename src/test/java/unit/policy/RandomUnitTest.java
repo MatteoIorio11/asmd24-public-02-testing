@@ -24,16 +24,15 @@ public class RandomUnitTest {
     @BeforeEach
     public void unit() {
         try {
-            MockitoAnnotations.openMocks(this);  // This initializes @Mock fields
+            MockitoAnnotations.openMocks(this);
             this.failingPolicy = new RandomFailing();
             final Field field = this.failingPolicy.getClass().getDeclaredField(RANDOM_ATTRIBUTE_NAME);
             field.setAccessible(true);
             field.set(this.failingPolicy, this.fixedRandom);
         } catch (Exception e) {
-            e.printStackTrace();  // Always print exceptions to debug issues
+            e.printStackTrace();
         }
     }
-
 
     @Description("The policy name of a RandomFailing policy should be 'random'")
     @Tag("unit")
