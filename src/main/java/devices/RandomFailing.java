@@ -1,9 +1,10 @@
 package devices;
 
 import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class RandomFailing implements FailingPolicy {
-    private final Random random = new Random();
+    private final RandomGenerator random = new Random();
     private boolean failed = false;
     @Override
     public boolean attemptOn() {
